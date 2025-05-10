@@ -42,9 +42,13 @@ Step-by-Step:
 1. Define the `filterProducts` function with appropriate parameters.
 2. Use the `filter()` method to apply the callback to the array.
 3. Return the filtered result.
-*/
-
-
+*/ function filterproducts (products,callback) {
+  return products.filter (callback);
+}
+const availableProducts = filterproducts(products, function(product) {
+  return product.inStock;
+});
+console.log("Available Products:", availableProducts);
 /*
 🔹 Task 2: Transform Product Names
 
@@ -54,9 +58,10 @@ Step-by-Step:
 1. Use `map()` on the products array.
 2. Extract and transform the `name` property to uppercase.
 3. Store the result in a new variable.
-*/
-
-
+*/ const upperCaseProductNames = products.map(function(product) {
+  return product.name.toUpperCase();
+});
+console.log("Uppercase Product Names:", upperCaseProductNames);
 /*
 🔹 Task 3: Generate Discounted Prices
 
@@ -68,8 +73,22 @@ Step-by-Step:
 1. Define a function `applyDiscount` that takes `discountPercent`.
 2. Return a new function that takes a product object.
 3. Use this returned function inside a `map()` call to apply discounts to all products.
-*/
-
+*/ function applyDiscount(discountPercent){
+  return function (product){
+    const discountAmount = product.price * (discountPercent / 100);
+    const discountedPrice = product.price - discountAmount;
+  }
+}
+return {
+  name: products.name,
+  originalPrice: products.price,
+  
+};
+{
+return calculateDiscount;
+}
+const discountedProducts = products.map(applyDiscount(20));
+console.log("Discounted Products:", discountedProducts);
 
 /*
 🔹 Task 4: Calculate Total Inventory Value
@@ -80,7 +99,13 @@ Step-by-Step:
 1. Use the `reduce()` method on the products array.
 2. Add only the prices of products where `inStock` is true.
 3. Store the total in a new variable.
-*/
+*/const totalInventoryValue = products.reduce((total, product) => {
+  if (product.inStock) {
+    return total + product.price;
+  }
+  return total;
+}, 0);
+console.log("Total Inventory Value (In Stock):", totalInventoryValue);
 
 
 // ============================================
